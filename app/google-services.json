@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "795103528824",
+    "firebase_url": "https://capstonefirebase-78c2c-default-rtdb.firebaseio.com",
+    "project_id": "capstonefirebase-78c2c",
+    "storage_bucket": "capstonefirebase-78c2c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795103528824:android:34ef2ed7ae6a4b9c726a8d",
+        "android_client_info": {
+          "package_name": "com.reactnativeproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795103528824-ev7m0h2d3oak1sllgld3vgh727pfpmsj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjOpyFwC0KTgLwgpfl3SBcBdZGJP8Ncik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795103528824-ev7m0h2d3oak1sllgld3vgh727pfpmsj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795103528824:android:14ec1f06b49f666f726a8d",
+        "android_client_info": {
+          "package_name": "sheridan.teodored.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795103528824-ev7m0h2d3oak1sllgld3vgh727pfpmsj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjOpyFwC0KTgLwgpfl3SBcBdZGJP8Ncik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795103528824-ev7m0h2d3oak1sllgld3vgh727pfpmsj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
