@@ -6,18 +6,24 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
 
+    <!-- General -->
+    <string name="Back">Back</string>
+    <string name="Log_Out">Log Out</string>
+    <string name="Settings">Settings</string>
+
     <!-- Main Page -->
     <string name="Title">Study Buddy</string>
-    <string name="Log_Out">Log Out</string>
     <string name="Upload_Assignment">Scan &amp; Upload Assignment</string>
     <string name="Saved_Assignments">Saved Assignments</string>
     <string name="Grades">Grades</string>
     <string name="Forum">Forum</string>
     <string name="Chat">Chat</string>
     <string name="Schedule">Schedule</string>
-    <string name="Settings">Settings</string>
+
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
