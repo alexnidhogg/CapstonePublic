@@ -35,6 +35,20 @@
         <action
             android:id="@+id/HomeScreen_toGrades"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_forumTopicFragment"
+            app:destination="@id/forumTopicFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/forumTopicFragment"
+        android:name="sheridan.teodored.myapplication.ForumTopicFragment"
+        android:label="fragment_forum_topic"
+        tools:layout="@layout/fragment_forum_topic" >
+        <action
+            android:id="@+id/action_forumTopicFragment_to_SecondFragment2"
+            app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_forumTopicFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
 </navigation>

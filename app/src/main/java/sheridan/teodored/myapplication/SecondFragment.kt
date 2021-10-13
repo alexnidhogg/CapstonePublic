@@ -36,6 +36,10 @@ class SecondFragment : Fragment() {
         binding.LogOut.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
+
+        binding.ForumButton.setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_forumTopicFragment)
+        }
     }
 
     override fun onDestroyView() {
