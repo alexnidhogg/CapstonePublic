@@ -31,7 +31,7 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.GradesButton.setOnClickListener { findNavController().navigate(R.id.SecondFragment_to_Grades) }
         //log out
         binding.LogOut.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
