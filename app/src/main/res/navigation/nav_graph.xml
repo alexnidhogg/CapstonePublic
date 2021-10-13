@@ -26,6 +26,9 @@
             app:destination="@id/FirstFragment" />
         <action android:id="@+id/SecondFragment_to_Grades"
             app:destination="@+id/Grades"/>
+        <action
+            android:id="@+id/action_SecondFragment_to_forumTopicFragment"
+            app:destination="@id/forumTopicFragment" />
     </fragment>
     <fragment
         android:id="@+id/Grades"
@@ -35,9 +38,7 @@
         <action
             android:id="@+id/HomeScreen_toGrades"
             app:destination="@id/SecondFragment" />
-        <action
-            android:id="@+id/action_SecondFragment_to_forumTopicFragment"
-            app:destination="@id/forumTopicFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/forumTopicFragment"
