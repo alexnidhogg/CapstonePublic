@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Assignment(
-    @PrimaryKey val uid: Int,
+    @PrimaryKey(autoGenerate = true) val uid: Int,
     @ColumnInfo (name = "class_name") val className: String?,
     @ColumnInfo (name= "assignment_grade") val assignmentGrade: Int?,
     @ColumnInfo (name = "assignment_name") val assignmentName: String?
