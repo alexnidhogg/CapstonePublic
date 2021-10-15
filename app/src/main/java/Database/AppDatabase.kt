@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 import java.security.AccessControlContext
 
 
-@Database(entities = [Class::class, Assignment::class], version = 3)
+@Database(entities = [Class::class, Assignment::class], version = 4)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun classDao(): ClassDao
     abstract fun assignmentDao() : AssignmentDao

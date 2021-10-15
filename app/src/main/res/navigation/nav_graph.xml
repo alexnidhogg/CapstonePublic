@@ -38,6 +38,9 @@
         <action
             android:id="@+id/HomeScreen_toGrades"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_grades_to_assignments"
+            app:destination="@+id/assignmentFragment"/>
 
     </fragment>
     <fragment
@@ -51,5 +54,16 @@
         <action
             android:id="@+id/action_forumTopicFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/assignmentFragment"
+        android:name="sheridan.teodored.myapplication.AssignmentViewFragment"
+        android:label="Assignments">
+        <action android:id="@+id/action_assignments_to_grades"
+            app:destination="@id/Grades"/>
+        <argument
+            android:name="className"
+            app:argType="string" />
+
     </fragment>
 </navigation>
