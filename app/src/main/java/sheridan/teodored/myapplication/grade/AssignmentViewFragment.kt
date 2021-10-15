@@ -1,6 +1,5 @@
-package sheridan.teodored.myapplication
+package sheridan.teodored.myapplication.grade
 
-import DataObjects.Assignment
 import Database.AppDatabase
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,8 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import sheridan.teodored.myapplication.databinding.FragmentAssignmentViewBinding
-import sheridan.teodored.myapplication.forum.AssignmentAdapter
-import sheridan.teodored.myapplication.forum.AssignmentData
 
 
 class AssignmentViewFragment : Fragment() {

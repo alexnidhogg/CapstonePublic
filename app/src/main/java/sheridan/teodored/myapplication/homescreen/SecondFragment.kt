@@ -1,4 +1,4 @@
-package sheridan.teodored.myapplication
+package sheridan.teodored.myapplication.homescreen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import sheridan.teodored.myapplication.R
 import sheridan.teodored.myapplication.databinding.FragmentSecondBinding
 
 /**
@@ -35,6 +36,9 @@ class SecondFragment : Fragment() {
         //log out
         binding.LogOut.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+        }
+        binding.UploadButton.setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_DocumentScan)
         }
 
         binding.ForumButton.setOnClickListener {

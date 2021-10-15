@@ -1,15 +1,15 @@
-package sheridan.teodored.myapplication.forum
+package sheridan.teodored.myapplication.grade
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.teodored.myapplication.R
+import sheridan.teodored.myapplication.forum.ForumThreadListElement
+import sheridan.teodored.myapplication.forum.ForumTopicListElement
 
-class GradesAdapter (private val Topics : ArrayList<ForumTopicName>) : RecyclerView.Adapter<GradesAdapter.GradesHolder>() {
+class GradesAdapter (private val Topics : ArrayList<AssignmentClassListElement>) : RecyclerView.Adapter<GradesAdapter.GradesHolder>() {
 
     private lateinit var mList : onItemClickListener
     interface onItemClickListener{
@@ -32,7 +32,7 @@ class GradesAdapter (private val Topics : ArrayList<ForumTopicName>) : RecyclerV
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GradesHolder {
 
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.forum_category_list_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.forum_topic_list_item, parent, false)
         return GradesHolder(itemView,mList)
 
     }

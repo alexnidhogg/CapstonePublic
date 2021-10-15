@@ -1,4 +1,4 @@
-package sheridan.teodored.myapplication
+package sheridan.teodored.myapplication.forum
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -17,9 +17,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import sheridan.teodored.myapplication.R
 import sheridan.teodored.myapplication.databinding.FragmentForumTopicBinding
-import sheridan.teodored.myapplication.forum.ForumTopicListAdapter
-import sheridan.teodored.myapplication.forum.ForumTopicListElement
 
 class ForumTopicFragment : Fragment() {
 

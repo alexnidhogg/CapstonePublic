@@ -1,11 +1,8 @@
-package sheridan.teodored.myapplication
+package sheridan.teodored.myapplication.grade
 
-import DataObjects.Class
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.graphics.Path
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,17 +13,17 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room.databaseBuilder
+import sheridan.teodored.myapplication.R
 import sheridan.teodored.myapplication.databinding.FragmentGradesBinding
-import sheridan.teodored.myapplication.forum.ForumTopicAdapter
+import sheridan.teodored.myapplication.forum.ForumThreadListElement
+import sheridan.teodored.myapplication.forum.ForumTopicListElement
 import Database.AppDatabase as AppDatabase
-import sheridan.teodored.myapplication.forum.ForumTopicName
-import sheridan.teodored.myapplication.forum.GradesAdapter
 
 class Grades : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var _binding: FragmentGradesBinding? = null
     private val binding get() = _binding!!
-    val arr = arrayListOf<ForumTopicName>()
+    val arr = arrayListOf<AssignmentClassListElement>()
 
     var cl : String = "test"
 
@@ -52,7 +49,7 @@ class Grades : Fragment() {
         val stuff = classD.getAll()
         val text = EditText(requireContext())
         for (classes in stuff){
-            val topic = ForumTopicName(classes.className.toString())
+            val topic = AssignmentClassListElement(classes.className.toString())
             arr.add(topic)
         }
         println(arr)

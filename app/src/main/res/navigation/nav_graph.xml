@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="sheridan.teodored.myapplication.FirstFragment"
+        android:name="sheridan.teodored.myapplication.login.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="sheridan.teodored.myapplication.SecondFragment"
+        android:name="sheridan.teodored.myapplication.homescreen.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
@@ -27,12 +27,15 @@
         <action android:id="@+id/SecondFragment_to_Grades"
             app:destination="@+id/Grades"/>
         <action
+            android:id="@+id/action_SecondFragment_to_DocumentScan"
+            app:destination="@id/documentScanFragment"/>
+        <action
             android:id="@+id/action_SecondFragment_to_forumTopicFragment"
             app:destination="@id/forumTopicFragment" />
     </fragment>
     <fragment
         android:id="@+id/Grades"
-        android:name="sheridan.teodored.myapplication.Grades"
+        android:name="sheridan.teodored.myapplication.grade.Grades"
         android:label="Grades View"
         tools:layout="@layout/fragment_grades">
         <action
@@ -45,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/forumTopicFragment"
-        android:name="sheridan.teodored.myapplication.ForumTopicFragment"
+        android:name="sheridan.teodored.myapplication.forum.ForumTopicFragment"
         android:label="fragment_forum_topic"
         tools:layout="@layout/fragment_forum_topic" >
         <action
@@ -60,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/forumThreadsFragment"
-        android:name="sheridan.teodored.myapplication.ForumThreadsFragment"
+        android:name="sheridan.teodored.myapplication.forum.ForumThreadsFragment"
         android:label="ForumThreadsFragment" >
         <action
             android:id="@+id/action_forumThreadsFragment_to_FirstFragment"
@@ -71,7 +74,7 @@
     </fragment>
     <fragment
         android:id="@+id/assignmentFragment"
-        android:name="sheridan.teodored.myapplication.AssignmentViewFragment"
+        android:name="sheridan.teodored.myapplication.grade.AssignmentViewFragment"
         android:label="Assignments">
         <action android:id="@+id/action_assignments_to_grades"
             app:destination="@id/Grades"/>
@@ -79,5 +82,12 @@
             android:name="className"
             app:argType="string" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/documentScanFragment"
+        android:name="sheridan.teodored.myapplication.documentScan.DocumentScanFragment"
+        android:label="Document Scanning" >
+        <action android:id="@+id/action_document_scan_to_home"
+            app:destination="@+id/Sec"/>
     </fragment>
 </navigation>
