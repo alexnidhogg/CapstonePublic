@@ -1,11 +1,11 @@
 package sheridan.teodored.myapplication
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 
 import androidx.navigation.fragment.findNavController
@@ -17,18 +17,23 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import sheridan.teodored.myapplication.databinding.FragmentForumThreadsBinding
 import sheridan.teodored.myapplication.databinding.FragmentForumTopicBinding
+import sheridan.teodored.myapplication.forum.ForumThreadListAdapter
+import sheridan.teodored.myapplication.forum.ForumThreadListElement
 import sheridan.teodored.myapplication.forum.ForumTopicListAdapter
 import sheridan.teodored.myapplication.forum.ForumTopicListElement
 
-class ForumTopicFragment : Fragment() {
+class ForumThreadsFragment : Fragment() {
 
-    private var _binding: FragmentForumTopicBinding? = null
+    private var _binding: FragmentForumThreadsBinding? = null
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var listOfTopics: ArrayList<ForumTopicListElement>
-    private lateinit var recyclerViewListAdapter: ForumTopicListAdapter
-    private lateinit var topics : Array<String>
+    private lateinit var listOfThreads: ArrayList<ForumThreadListElement>
+    private lateinit var recyclerViewListAdapter: ForumThreadListAdapter
+    private lateinit var threads : Array<String>
+
+    private var topic : String? = null
 
     private var fireStore : FirebaseFirestore = FirebaseFirestore.getInstance()
 
@@ -40,43 +45,37 @@ class ForumTopicFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentForumTopicBinding.inflate(inflater, container, false)
+        _binding = FragmentForumThreadsBinding.inflate(inflater, container, false)
 
-        recyclerView = binding.forumTopicsRecyclerView
+        topic = arguments?.getString("Topic")
+
+        println(topic)
+
+        recyclerView = binding.forumThreadRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.setHasFixedSize(true)
 
-        listOfTopics = arrayListOf()
-        topics = arrayOf()
-        for (it in topics) {
-            val topic = ForumTopicListElement(it, ::navigateToForumTopic)
-            listOfTopics.add(topic)
-        }
-        recyclerViewListAdapter = ForumTopicListAdapter(listOfTopics)
+        listOfThreads = arrayListOf<ForumThreadListElement>()
+        threads = arrayOf()
+
+        recyclerViewListAdapter = ForumThreadListAdapter(listOfThreads)
         recyclerView.adapter = recyclerViewListAdapter
 
         this.lifecycleScope.launch {
             withContext(Dispatchers.IO) {
-                var query = Tasks.await(fireStore.collection("ForumTopic").get(), 2, java.util.concurrent.TimeUnit.SECONDS)
+                var query = Tasks.await(fireStore.collection("ForumThread").whereEqualTo("Topic", topic).get(), 6, java.util.concurrent.TimeUnit.SECONDS)
 
                 for(i in 0..(query.count()-1)) {
-                    val topic = ForumTopicListElement(query.documents[i].get("Name").toString(), ::navigateToForumTopic)
-                    listOfTopics.add(topic)
+                    val topic = ForumThreadListElement(query.documents[i].get("Title").toString(), query.documents[i].id)
+                    listOfThreads.add(topic)
                 }
-
-                recyclerViewListAdapter.notifyItemRangeInserted(0,query.count())
+                if (query.count() > 0) {
+                    recyclerViewListAdapter.notifyItemRangeInserted(0,query.count())
+                }
             }
         }
 
         return binding.root
-    }
-
-    fun navigateToForumTopic(name: String) : Void? {
-
-        val bundle = bundleOf("Topic" to name)
-
-        findNavController().navigate(R.id.action_forumTopicFragment_to_forumThreadsFragment, bundle)
-        return null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -84,8 +83,7 @@ class ForumTopicFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         if (FirebaseAuth.getInstance().currentUser == null){
-
-            findNavController().navigate(R.id.action_forumTopicFragment_to_FirstFragment)
+            findNavController().navigate(R.id.action_forumThreadsFragment_to_FirstFragment)
         }
     }
 

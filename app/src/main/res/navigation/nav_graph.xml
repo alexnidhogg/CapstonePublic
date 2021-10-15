@@ -54,6 +54,20 @@
         <action
             android:id="@+id/action_forumTopicFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_forumTopicFragment_to_forumThreadsFragment"
+            app:destination="@id/forumThreadsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forumThreadsFragment"
+        android:name="sheridan.teodored.myapplication.ForumThreadsFragment"
+        android:label="ForumThreadsFragment" >
+        <action
+            android:id="@+id/action_forumThreadsFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_forumThreadsFragment_to_forumTopicFragment"
+            app:destination="@id/forumTopicFragment" />
     </fragment>
     <fragment
         android:id="@+id/assignmentFragment"

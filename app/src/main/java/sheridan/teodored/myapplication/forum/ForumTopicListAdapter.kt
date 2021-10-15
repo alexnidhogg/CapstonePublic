@@ -7,7 +7,7 @@ import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.teodored.myapplication.R
 
-class ForumTopicAdapter(private val Topics : ArrayList<ForumTopicName>) : RecyclerView.Adapter<ForumTopicAdapter.ForumTopicHolder>() {
+class ForumTopicListAdapter(private val topics : ArrayList<ForumTopicListElement>) : RecyclerView.Adapter<ForumTopicListAdapter.ForumTopicHolder>() {
 
     class ForumTopicHolder (itemView : View) : RecyclerView.ViewHolder(itemView){
         val button : Button = itemView.findViewById(R.id.forum_topic_button)
@@ -15,21 +15,24 @@ class ForumTopicAdapter(private val Topics : ArrayList<ForumTopicName>) : Recycl
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForumTopicHolder {
 
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.forum_category_list_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.forum_topic_list_item, parent, false)
         return ForumTopicHolder(itemView)
 
     }
 
     override fun onBindViewHolder(holder: ForumTopicHolder, position: Int) {
 
-        val currentItem = Topics[position]
+        val currentItem = topics[position]
         holder.button.setText(currentItem.Name)
+        holder.button.setOnClickListener {
+            currentItem.Callback(currentItem.Name)
+        }
 
     }
 
     override fun getItemCount(): Int {
 
-        return Topics.size;
+        return topics.size;
 
     }
 
