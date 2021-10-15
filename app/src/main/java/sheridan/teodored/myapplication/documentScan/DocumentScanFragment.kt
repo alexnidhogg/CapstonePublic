@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import sheridan.teodored.myapplication.databinding.FragmentDocumentScanBinding
 import java.io.ByteArrayOutputStream
-import java.util.*
 
 
 class DocumentScanFragment : Fragment() {
@@ -59,7 +58,7 @@ class DocumentScanFragment : Fragment() {
         if(requestCode == 43 && resultCode == Activity.RESULT_OK){
             val img = data?.extras?.get("data") as Bitmap
             auth = FirebaseAuth.getInstance()
-            val upload = documentData(FirebaseAuth.getInstance().currentUser?.uid, encode(img))
+            val upload = DocumentData(FirebaseAuth.getInstance().currentUser?.uid, encode(img))
             binding.preview.setImageBitmap(img)
             binding.preview.isVisible = true
             var data : MutableMap<String, String> = mutableMapOf()

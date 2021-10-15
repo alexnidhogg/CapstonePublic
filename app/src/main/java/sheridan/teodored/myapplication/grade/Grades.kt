@@ -68,7 +68,7 @@ class Grades : Fragment() {
 
 
         binding.addClass.setOnClickListener {
-            val dialog = AlertDialog.Builder(requireContext()).setTitle("Im gay")
+            val dialog = AlertDialog.Builder(requireContext()).setTitle("New Class")
                 .setMessage("Add a new class?")
                 .setView(text)
                 .setPositiveButton(
