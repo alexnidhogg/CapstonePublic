@@ -27,6 +27,17 @@ class Grades : Fragment() {
 
     var cl : String = "test"
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val db = databaseBuilder(requireContext().applicationContext, AppDatabase::class.java, "name").fallbackToDestructiveMigration().allowMainThreadQueries().build()
+        val classD = db.classDao()
+        val stuff = classD.getAll()
+        for (classes in stuff){
+            val topic = AssignmentClassListElement(classes.className.toString())
+            arr.add(topic)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +48,7 @@ class Grades : Fragment() {
         recyclerView.setHasFixedSize(true)
 
 
+
         return binding.root
 
 
@@ -44,14 +56,10 @@ class Grades : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val text = EditText(requireContext())
         val db = databaseBuilder(requireContext().applicationContext, AppDatabase::class.java, "name").fallbackToDestructiveMigration().allowMainThreadQueries().build()
         val classD = db.classDao()
-        val stuff = classD.getAll()
-        val text = EditText(requireContext())
-        for (classes in stuff){
-            val topic = AssignmentClassListElement(classes.className.toString())
-            arr.add(topic)
-        }
         println(arr)
         var adapter = GradesAdapter(arr)
         recyclerView.adapter = adapter
@@ -60,7 +68,6 @@ class Grades : Fragment() {
                 println(arr[position].Name)
                 val bundle = bundleOf("cam" to arr[position].Name)
                 findNavController().navigate(R.id.action_grades_to_assignments, bundle)
-
 
 
             }
@@ -73,7 +80,12 @@ class Grades : Fragment() {
                 .setView(text)
                 .setPositiveButton(
                     "Add", DialogInterface.OnClickListener { dialogInterface, i
-                        -> classD.insertAll(DataObjects.Class(uid = 0, className = text.text.toString())) })
+                        ->
+                        val classVal = AssignmentClassListElement(text.text.toString())
+                        arr.add(classVal)
+                        classD.insertAll(DataObjects.Class(uid = 0, className = text.text.toString()))
+                        adapter.notifyDataSetChanged()
+                    })
                 .setNegativeButton("Cancel", null)
                 .create()
             dialog.show()
