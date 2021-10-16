@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import sheridan.teodored.myapplication.R
 import sheridan.teodored.myapplication.databinding.FragmentSecondBinding
 
@@ -15,6 +16,8 @@ import sheridan.teodored.myapplication.databinding.FragmentSecondBinding
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
+
+    private lateinit var auth: FirebaseAuth
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -26,6 +29,12 @@ class SecondFragment : Fragment() {
     ): View? {
 
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
+
+        auth = FirebaseAuth.getInstance()
+        if(auth.currentUser == null){
+            findNavController().navigateUp()
+        }
+
         return binding.root
 
     }
@@ -35,7 +44,8 @@ class SecondFragment : Fragment() {
         binding.GradesButton.setOnClickListener { findNavController().navigate(R.id.SecondFragment_to_Grades) }
         //log out
         binding.LogOut.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            auth.signOut()
+            findNavController().navigateUp()
         }
         binding.UploadButton.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_DocumentScan)

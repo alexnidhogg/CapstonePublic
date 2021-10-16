@@ -21,9 +21,6 @@
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
         <action android:id="@+id/SecondFragment_to_Grades"
             app:destination="@+id/Grades"/>
         <action
@@ -52,25 +49,19 @@
         android:label="fragment_forum_topic"
         tools:layout="@layout/fragment_forum_topic" >
         <action
-            android:id="@+id/action_forumTopicFragment_to_SecondFragment2"
-            app:destination="@id/SecondFragment" />
-        <action
-            android:id="@+id/action_forumTopicFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-        <action
             android:id="@+id/action_forumTopicFragment_to_forumThreadsFragment"
             app:destination="@id/forumThreadsFragment" />
     </fragment>
     <fragment
         android:id="@+id/forumThreadsFragment"
-        android:name="sheridan.teodored.myapplication.forum.ForumThreadsFragment"
+        android:name="sheridan.teodored.myapplication.forum.ForumThreadFragment"
         android:label="ForumThreadsFragment" >
         <action
-            android:id="@+id/action_forumThreadsFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_forumThreadsFragment_to_forumPostFragment"
+            app:destination="@id/forumPostFragment" />
         <action
-            android:id="@+id/action_forumThreadsFragment_to_forumTopicFragment"
-            app:destination="@id/forumTopicFragment" />
+            android:id="@+id/action_forumThreadsFragment_to_forumNewThreadFragment"
+            app:destination="@id/forumNewThreadFragment" />
     </fragment>
     <fragment
         android:id="@+id/assignmentFragment"
@@ -90,4 +81,13 @@
         <action android:id="@+id/action_document_scan_to_home"
             app:destination="@+id/Sec"/>
     </fragment>
+    <fragment
+        android:id="@+id/forumPostFragment"
+        android:name="sheridan.teodored.myapplication.forum.ForumPostFragment"
+        android:label="ForumPostFragment" />
+    <fragment
+        android:id="@+id/forumNewThreadFragment"
+        android:name="sheridan.teodored.myapplication.forum.ForumNewThreadFragment"
+        android:label="fragment_forum_new_thread"
+        tools:layout="@layout/fragment_forum_new_thread" />
 </navigation>

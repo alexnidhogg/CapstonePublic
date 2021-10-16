@@ -67,15 +67,25 @@ class ForumTopicFragment : Fragment() {
             }
         }
 
+        binding.forumTopicsBackButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        binding.forumTopicsLogOutButton.setOnClickListener {
+            auth.signOut()
+            findNavController().navigateUp()
+            findNavController().navigateUp()
+        }
+
         return binding.root
     }
 
     fun navigateToForumTopic(name: String) : Void? {
 
         val bundle = bundleOf("Topic" to name)
-
         findNavController().navigate(R.id.action_forumTopicFragment_to_forumThreadsFragment, bundle)
         return null
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -83,8 +93,8 @@ class ForumTopicFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         if (FirebaseAuth.getInstance().currentUser == null){
-
-            findNavController().navigate(R.id.action_forumTopicFragment_to_FirstFragment)
+            findNavController().navigateUp()
+            findNavController().navigateUp()
         }
     }
 

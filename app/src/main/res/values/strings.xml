@@ -22,6 +22,11 @@
 
     <!-- Forum -->
     <string name="New_Thread">New Thread</string>
+    <string name="Post">Post</string>
+    <string name="Create_Thread">Create Thread</string>
+    <string name="Thread_Name">Thread Name</string>
+    <string name="First_Message">First Message</string>
+    <string name="StudyBuddyForum">Study Buddy Forum</string>
 
 
     <string name="hello_first_fragment">Hello first fragment</string>

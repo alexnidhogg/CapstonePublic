@@ -24,6 +24,9 @@ class ForumThreadListAdapter(private val topics : ArrayList<ForumThreadListEleme
 
         val currentItem = topics[position]
         holder.button.setText(currentItem.Title)
+        holder.button.setOnClickListener {
+            currentItem.callback(currentItem.Id)
+        }
 
     }
 
