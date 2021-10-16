@@ -15,7 +15,7 @@
         android:layout_weight="1" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_add_assignment"
         android:layout_width="300dp"
         android:layout_height="20dp"
         android:layout_weight=".2"

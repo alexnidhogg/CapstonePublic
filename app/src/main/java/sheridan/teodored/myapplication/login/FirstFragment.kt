@@ -17,8 +17,6 @@ class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
     private lateinit var auth: FirebaseAuth
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -33,14 +31,17 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //get instance of Firebase
         auth = FirebaseAuth.getInstance()
 
+        //Check if there is a user currently logged in if true go to homepage
         if (FirebaseAuth.getInstance().currentUser == null){
-            println("Isnt logged")
+            println("No User Found")
         }else{
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
 
+        //Log user in using credentials
         binding.buttonFirst.setOnClickListener {
             val user = binding.UserName.text.toString()
             val pass = binding.UserPass.text.toString()
@@ -50,7 +51,7 @@ class FirstFragment : Fragment() {
                     findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
                 }
             }.addOnFailureListener { exception ->
-                println("nice cock")
+                println("Navigation Failed")
             }
         }
     }
@@ -58,18 +59,6 @@ class FirstFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-    fun Login(view: View){
-        val user = binding.UserName.text.toString()
-        val pass = _binding?.UserPass?.text.toString()
-        println(user)
-        auth.signInWithEmailAndPassword(user,pass).addOnCompleteListener { task ->
-            if(task.isSuccessful){
-                findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-            }
-        }.addOnFailureListener { exception ->
-            println("nice cock")
-        }
     }
 
 
