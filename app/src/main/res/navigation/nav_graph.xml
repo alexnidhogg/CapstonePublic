@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_SecondFragment_to_forumTopicFragment"
             app:destination="@id/forumTopicFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_saved_documents"
+            app:destination="@+id/documentScanSavedAssignmentsFragment"/>
     </fragment>
     <fragment
         android:id="@+id/Grades"
@@ -90,4 +93,8 @@
         android:name="sheridan.teodored.myapplication.forum.ForumNewThreadFragment"
         android:label="fragment_forum_new_thread"
         tools:layout="@layout/fragment_forum_new_thread" />
+    <fragment
+        android:id="@+id/documentScanSavedAssignmentsFragment"
+        android:name="sheridan.teodored.myapplication.documentScan.DocumentScanSavedAssignmentsFragment"
+        android:label="fragment_view_assignments"/>
 </navigation>

@@ -54,6 +54,9 @@ class SecondFragment : Fragment() {
         binding.ForumButton.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_forumTopicFragment)
         }
+        binding.SavedAssignmentsButton.setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_saved_documents)
+        }
     }
 
     override fun onDestroyView() {
