@@ -84,8 +84,8 @@ class ForumPostFragment : Fragment() {
                     }
                     println(snapshot)
                     if (snapshot != null) {
-                        val oldLength = listOfPosts.size
-                        var numberToAdd = 0
+                        var tempListOfPosts = mutableListOf<ForumPostListElement>()
+
                         for (doc in snapshot.documents) {
                             val post = ForumPostListElement(
                                 doc.get("AuthorName").toString(),
@@ -94,14 +94,20 @@ class ForumPostFragment : Fragment() {
                                 doc.id
                             )
                             if (!listOfPosts.contains(post)) {
-                                listOfPosts.add(post)
-                                numberToAdd += 1
+                                tempListOfPosts.add(post)
                             }
                         }
-                        if (numberToAdd > 0) {
+
+                        tempListOfPosts = tempListOfPosts.sortedWith(compareBy{it.TimePosted}).toMutableList()
+
+                        for(item in tempListOfPosts){
+                             listOfPosts.add(item)
+                        }
+
+                        if (tempListOfPosts.size > 0) {
                             recyclerViewListAdapter.notifyItemRangeInserted(
-                                oldLength,
-                                numberToAdd
+                                listOfPosts.size - tempListOfPosts.size,
+                                tempListOfPosts.size
                             )
                         }
                     }
