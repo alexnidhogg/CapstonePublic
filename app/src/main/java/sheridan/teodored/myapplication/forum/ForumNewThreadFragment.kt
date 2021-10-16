@@ -27,6 +27,8 @@ class ForumNewThreadFragment : Fragment() {
 
     private var topic : String? = null
 
+    private var MyName : String = ""
+
     private lateinit var auth: FirebaseAuth
     private val binding get() = _binding!!
 
@@ -36,6 +38,8 @@ class ForumNewThreadFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentForumNewThreadBinding.inflate(inflater, container, false)
+
+        auth = FirebaseAuth.getInstance()
 
         topic = arguments?.get("Topic").toString()
         if(topic == null) {
@@ -60,6 +64,7 @@ class ForumNewThreadFragment : Fragment() {
         var working = false;
 
         binding.forumNewThreadCreateButton.setOnClickListener {
+            println(MyName)
             if(!working) {
                 if (binding.forumNewThreadNameEditText.text.isNotEmpty() && binding.forumNewThreadMessageEditText.text.isNotEmpty()) {
                     working = true
@@ -73,6 +78,7 @@ class ForumNewThreadFragment : Fragment() {
                             var query = Tasks.await(fireStore.collection("ForumThread").add(data))
                             var post = mutableMapOf<String, Any>()
                             post.put("Author", auth.currentUser!!.uid)
+                            post.put("AuthorName", MyName)
                             post.put("Message", binding.forumNewThreadMessageEditText.text.toString())
                             post.put("TimePosted", Timestamp.now())
                             var second_query = Tasks.await(fireStore.collection("ForumThread").document(query.id).collection("Posts").add(post))
@@ -86,14 +92,22 @@ class ForumNewThreadFragment : Fragment() {
             }
         }
 
+        this.lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                var result = Tasks.await(fireStore.collection("Users").whereEqualTo("UserId", auth.currentUser!!.uid).get())
+                println(result.documents)
+                MyName = result.documents[0].get("FirstName").toString() + " " + result.documents[0].get("LastName").toString()
+                println(MyName)
+            }
+        }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        auth = FirebaseAuth.getInstance()
 
-        if (FirebaseAuth.getInstance().currentUser == null){
+        if (auth.currentUser == null){
             findNavController().navigateUp()
             findNavController().navigateUp()
             findNavController().navigateUp()
