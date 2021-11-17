@@ -16,7 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import sheridan.teodored.myapplication.databinding.FragmentDocumentScanBinding
 import java.io.ByteArrayOutputStream
 
-
+///DEPRECATED
 class DocumentScanFragment : Fragment() {
 
     private var _binding: FragmentDocumentScanBinding? = null

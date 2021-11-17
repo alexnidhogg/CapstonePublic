@@ -25,7 +25,7 @@
             app:destination="@+id/Grades"/>
         <action
             android:id="@+id/action_SecondFragment_to_DocumentScan"
-            app:destination="@id/documentScanFragment"/>
+            app:destination="@id/documentPhoto"/>
         <action
             android:id="@+id/action_SecondFragment_to_forumTopicFragment"
             app:destination="@id/forumTopicFragment" />
@@ -97,4 +97,8 @@
         android:id="@+id/documentScanSavedAssignmentsFragment"
         android:name="sheridan.teodored.myapplication.documentScan.DocumentScanSavedAssignmentsFragment"
         android:label="fragment_view_assignments"/>
+    <fragment
+        android:id="@+id/documentPhoto"
+        android:name="sheridan.teodored.myapplication.documentScan2.documentPhotoFragment"
+        android:label="fragment_document_photo"/>
 </navigation>
