@@ -1,7 +1,6 @@
 package sheridan.teodored.myapplication.homescreen
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -55,10 +54,11 @@ class SecondFragment : Fragment() {
         binding.ForumButton.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_forumTopicFragment)
         }
-
+        binding.SavedAssignmentsButton.setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_saved_documents)
+        }
         binding.ChatButton.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_chatMenuFragment)
-            println("did it even get this far?")
         }
     }
 

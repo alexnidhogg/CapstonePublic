@@ -75,7 +75,7 @@ class DocumentScanFragment : Fragment() {
 
     private fun encode(bm: Bitmap) : String?{
         val byte = ByteArrayOutputStream()
-        bm.compress(Bitmap.CompressFormat.JPEG,100,byte)
+        bm.compress(Bitmap.CompressFormat.PNG,100,byte)
         val b = byte.toByteArray()
         return Base64.encodeToString(b, Base64.DEFAULT)
     }
