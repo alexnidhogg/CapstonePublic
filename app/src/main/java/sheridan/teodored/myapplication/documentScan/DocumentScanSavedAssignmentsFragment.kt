@@ -26,7 +26,9 @@ class DocumentScanSavedAssignmentsFragment : Fragment() {
 
 
 
+
     var arr = arrayListOf<DocumentScanSavedImage>()
+    var docIdArray = arrayListOf<String>()
     private lateinit var auth: FirebaseAuth
 
 
@@ -48,7 +50,9 @@ class DocumentScanSavedAssignmentsFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
 
-        var recyclerViewAdapter = DocumentScanAdapter(arr)
+
+
+        var recyclerViewAdapter = DocumentScanAdapter(this.lifecycleScope, arr, docIdArray)
         recyclerView.adapter = recyclerViewAdapter
         // Inflate the layout for this fragment
         this.lifecycleScope.launch {
@@ -56,12 +60,13 @@ class DocumentScanSavedAssignmentsFragment : Fragment() {
             withContext(Dispatchers.IO){
                 var query = Tasks.await(fireStore.collection("UserDocs").whereEqualTo("user", FirebaseAuth.getInstance().currentUser?.uid).get(),6,java.util.concurrent.TimeUnit.SECONDS)
                     for (i in 0..(query.count() - 1)) {
-                        println(query.count())
+
                         val byteString = query.documents[i].get("docBase64").toString()
                         val assignment = DocumentScanSavedImage(
                             img64 = byteString
                         )
                         arr.add(assignment)
+                        docIdArray.add(query.documents[i].id)
                     }
                     if (query.count() > 0) {
                         recyclerViewAdapter.notifyItemRangeInserted(0, query.count())
