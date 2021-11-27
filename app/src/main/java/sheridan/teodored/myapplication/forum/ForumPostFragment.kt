@@ -174,8 +174,8 @@ class ForumPostFragment : Fragment() {
                         withContext(Dispatchers.IO) {
                             val SenderCheck = Tasks.await(
                                 fireStore.collection("ChatThread")
-                                    .whereEqualTo("Sender", auth.currentUser!!.uid)
-                                    .whereEqualTo("Recipient", User).get()
+                                    .whereEqualTo("Recipient", auth.currentUser!!.uid)
+                                    .whereEqualTo("Sender", User).get()
                             )
                             if (SenderCheck.count() == 0) {
                                 val RecipientCheck = Tasks.await(

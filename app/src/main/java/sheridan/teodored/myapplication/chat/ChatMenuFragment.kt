@@ -16,6 +16,7 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -69,52 +70,71 @@ class ChatMenuFragment : Fragment() {
                 var second_query = Tasks.await(fireStore.collection("ChatThread").whereEqualTo("Recipient", auth.currentUser?.uid).orderBy("LastUpdate", Query.Direction.DESCENDING).get(), 6, java.util.concurrent.TimeUnit.SECONDS)
 
                 //Chats you initiated
-                for(i in 0..(query.count()-1)) {
-                    val topic = ChatMenuListElement(query.documents[i].get("Recipient").toString(), query.documents[i].id, ::navigateToChatThread,  (query.documents[i].get("LastUpdate") as Timestamp).nanoseconds)
-                    namesToLoad.add(topic.Title)
-                    tempList.add(topic)
+                if(query.count() > 0){
+                    for(i in 0..(query.count()-1)) {
+                        val topic = ChatMenuListElement(query.documents[i].get("Recipient").toString(), query.documents[i].id, ::navigateToChatThread,  (query.documents[i].get("LastUpdate") as Timestamp).nanoseconds)
+                        namesToLoad.add(topic.Title)
+                        tempList.add(topic)
+                    }
                 }
 
                 //Chats someone else initiated
-                for(i in 0..(second_query.count()-1)) {
-                    val topic = ChatMenuListElement(second_query.documents[i].get("Sender").toString(), second_query.documents[i].id, ::navigateToChatThread,  (second_query.documents[i].get("LastUpdate") as Timestamp).nanoseconds)
-                    namesToLoad.add(topic.Title)
-                    tempList.add(topic)
-                }
-
-                val tempRegList = tempList.sortedBy {
-                    it.LastUpdate
-                }.reversed()
-
-                println(namesToLoad.count())
-                println(namesToLoad[0])
-
-                val loadedNamesQuery = Tasks.await(fireStore.collection("Users").whereIn("UserId", namesToLoad).get(), 6, java.util.concurrent.TimeUnit.SECONDS)
-
-                println(loadedNamesQuery.count())
-
-                for(i in 0..(loadedNamesQuery.count()-1)) {
-                    println(loadedNamesQuery.documents[i].get("UserId").toString())
-                    println(loadedNamesQuery.documents[i].get("FirstName").toString() + " " + loadedNamesQuery.documents[i].get("LastName").toString())
-                    loadedNames.put(loadedNamesQuery.documents[i].get("UserId").toString(),
-                        loadedNamesQuery.documents[i].get("FirstName")
-                            .toString() + " " + loadedNamesQuery.documents[i].get("LastName")
-                            .toString()
-                    )
-                }
-
-                for(i in tempRegList) {
-                    var Name = loadedNames.get(i.Title)
-                    if (Name == null) {
-                        Name = ""
+                if(second_query.count() > 0) {
+                    for (i in 0..(second_query.count() - 1)) {
+                        val topic = ChatMenuListElement(second_query.documents[i].get("Sender").toString(), second_query.documents[i].id, ::navigateToChatThread, (second_query.documents[i].get("LastUpdate") as Timestamp).nanoseconds)
+                        namesToLoad.add(topic.Title)
+                        tempList.add(topic)
                     }
-                    listOfThreads.add(
-                        ChatMenuListElement(Name, i.Id, i.callback, i.LastUpdate)
-                    )
                 }
 
-                if (query.count() > 0 || second_query.count() > 0) {
-                    recyclerViewListAdapter.notifyItemRangeInserted(0,query.count() + second_query.count())
+                if(tempList.count() > 0) {
+                    val tempRegList = tempList.sortedBy {
+                        it.LastUpdate
+                    }.reversed()
+
+
+                    println(namesToLoad.count())
+                    println(namesToLoad[0])
+
+                    val loadedNamesQuery = Tasks.await(
+                        fireStore.collection("Users").whereIn("UserId", namesToLoad).get(),
+                        6,
+                        java.util.concurrent.TimeUnit.SECONDS
+                    )
+
+                    if (loadedNamesQuery != null) {
+                        for (i in 0..(loadedNamesQuery.count() - 1)) {
+                            println(loadedNamesQuery.documents[i].get("UserId").toString())
+                            println(
+                                loadedNamesQuery.documents[i].get("FirstName")
+                                    .toString() + " " + loadedNamesQuery.documents[i].get("LastName")
+                                    .toString()
+                            )
+                            loadedNames.put(
+                                loadedNamesQuery.documents[i].get("UserId").toString(),
+                                loadedNamesQuery.documents[i].get("FirstName")
+                                    .toString() + " " + loadedNamesQuery.documents[i].get("LastName")
+                                    .toString()
+                            )
+                        }
+                    }
+
+                    for (i in tempRegList) {
+                        var Name = loadedNames.get(i.Title)
+                        if (Name == null) {
+                            Name = ""
+                        }
+                        listOfThreads.add(
+                            ChatMenuListElement(Name, i.Id, i.callback, i.LastUpdate)
+                        )
+                    }
+
+                    if (query.count() > 0 || second_query.count() > 0) {
+                        recyclerViewListAdapter.notifyItemRangeInserted(
+                            0,
+                            query.count() + second_query.count()
+                        )
+                    }
                 }
             }
         }
