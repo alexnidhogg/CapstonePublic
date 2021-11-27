@@ -61,11 +61,10 @@ class DocumentScanFragment : Fragment() {
             val upload = DocumentData(FirebaseAuth.getInstance().currentUser?.uid, encode(img))
             binding.preview.setImageBitmap(img)
             binding.preview.isVisible = true
-            var data : MutableMap<String, String> = mutableMapOf()
-            data.put("user", upload.userId.toString())
-            data.put("docBase64", upload.imgBase.toString())
-            fireStore.collection("UserDocs").add(data.toMap())
-
+            var writeData : MutableMap<String, String> = mutableMapOf()
+            writeData.put("user", upload.userId.toString())
+            writeData.put("docBase64", upload.imgBase.toString())
+            fireStore.collection("UserDocs").add(writeData.toMap())
         }else{
             println("Nah G")
             super.onActivityResult(requestCode, resultCode, data)

@@ -1,39 +1,34 @@
-package sheridan.teodored.myapplication.forum
+package sheridan.teodored.myapplication.chat
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.teodored.myapplication.R
 
-class ForumPostListAdapter(private val topics : ArrayList<ForumPostListElement>) : RecyclerView.Adapter<ForumPostListAdapter.ForumPostListHolder>() {
+class ChatMessageListAdapter(private val topics : ArrayList<ChatMessageListElement>) : RecyclerView.Adapter<ChatMessageListAdapter.ChatMessageListHolder>() {
 
-    class ForumPostListHolder (itemView : View) : RecyclerView.ViewHolder(itemView){
+    class ChatMessageListHolder (itemView : View) : RecyclerView.ViewHolder(itemView){
         val AuthorLabel : TextView = itemView.findViewById(R.id.Author_Label)
         val MessageLabel : TextView = itemView.findViewById(R.id.Message_Label)
         val TimeStampLabel : TextView = itemView.findViewById(R.id.TimeStamp_Label)
-        val view = itemView
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForumPostListHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatMessageListHolder {
 
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.forum_post_list_item, parent, false)
-        return ForumPostListHolder(itemView)
+        return ChatMessageListHolder(itemView)
 
     }
 
-    override fun onBindViewHolder(holder: ForumPostListHolder, position: Int) {
+    override fun onBindViewHolder(holder: ChatMessageListHolder, position: Int) {
 
         val currentItem = topics[position]
         holder.AuthorLabel.text = currentItem.Author
         holder.MessageLabel.text = currentItem.Message
         holder.TimeStampLabel.text = currentItem.TimePosted.toString()
-        holder.view.setOnClickListener {
-            currentItem.Press(position, holder.view, currentItem.UID)
-        }
 
     }
 

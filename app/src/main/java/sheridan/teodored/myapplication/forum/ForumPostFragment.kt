@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.lifecycle.lifecycleScope
 
 import androidx.navigation.fragment.findNavController
@@ -89,9 +90,11 @@ class ForumPostFragment : Fragment() {
                         for (doc in snapshot.documents) {
                             val post = ForumPostListElement(
                                 doc.get("AuthorName").toString(),
+                                doc.get("Author").toString(),
                                 doc.get("Message").toString(),
                                 (doc.get("TimePosted") as Timestamp).toDate(),
-                                doc.id
+                                doc.id,
+                                ::ShowContextMenu
                             )
                             if (!listOfPosts.contains(post)) {
                                 tempListOfPosts.add(post)
@@ -155,6 +158,86 @@ class ForumPostFragment : Fragment() {
         return binding.root
     }
 
+    fun ShowContextMenu(Id : Int, Anchor : View, User : String) : Void? {
+        val menu = PopupMenu(this.context, Anchor)
+        menu.menu.apply {
+            add("Report").setOnMenuItemClickListener {
+                println("Reported")
+                true
+            }
+            add("Send Message").setOnMenuItemClickListener {
+                if(User == auth.currentUser?.uid){
+                    //Do Nothing, Can't Message Yourself
+                }
+                else {
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        withContext(Dispatchers.IO) {
+                            val SenderCheck = Tasks.await(
+                                fireStore.collection("ChatThread")
+                                    .whereEqualTo("Sender", auth.currentUser!!.uid)
+                                    .whereEqualTo("Recipient", User).get()
+                            )
+                            if (SenderCheck.count() == 0) {
+                                val RecipientCheck = Tasks.await(
+                                    fireStore.collection("ChatThread")
+                                        .whereEqualTo("Sender", auth.currentUser!!.uid)
+                                        .whereEqualTo("Recipient", User).get()
+                                )
+                                if (RecipientCheck.count() == 0) {
+                                    // Create New Chat
+                                    var data = mutableMapOf<String, Any>()
+                                    data.put("Sender", auth.currentUser!!.uid)
+                                    data.put("Recipient", User)
+                                    data.put("LastUpdate", Timestamp.now())
+                                    val CreateChat = Tasks.await(
+                                        fireStore.collection("ChatThread").add(data)
+                                    )
+                                    findNavController().navigateUp()
+                                    findNavController().navigateUp()
+                                    findNavController().navigateUp()
+                                    findNavController().navigate(R.id.action_SecondFragment_to_chatMenuFragment)
+                                    val bundle = Bundle();
+                                    bundle.putString("Chat", CreateChat.id)
+                                    findNavController().navigate(
+                                        R.id.action_chatMenuFragment_to_chatMessageFragment,
+                                        bundle
+                                    )
+                                } else {
+                                    //Go To Existing Chat
+                                    findNavController().navigateUp()
+                                    findNavController().navigateUp()
+                                    findNavController().navigateUp()
+                                    findNavController().navigate(R.id.action_SecondFragment_to_chatMenuFragment)
+                                    val bundle = Bundle();
+                                    bundle.putString("Chat", RecipientCheck.documents[0].id)
+                                    findNavController().navigate(
+                                        R.id.action_chatMenuFragment_to_chatMessageFragment,
+                                        bundle
+                                    )
+                                }
+                            } else {
+                                //Go To Existing Chat
+                                findNavController().navigateUp()
+                                findNavController().navigateUp()
+                                findNavController().navigateUp()
+                                findNavController().navigate(R.id.action_SecondFragment_to_chatMenuFragment)
+                                val bundle = Bundle();
+                                bundle.putString("Chat", SenderCheck.documents[0].id)
+                                findNavController().navigate(
+                                    R.id.action_chatMenuFragment_to_chatMessageFragment,
+                                    bundle
+                                )
+                            }
+                        }
+                    }
+                }
+                true
+            }
+        }
+        menu.show()
+        return null
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -170,6 +253,5 @@ class ForumPostFragment : Fragment() {
         super.onDestroyView()
         _binding = null
         listener.remove()
-
     }
 }

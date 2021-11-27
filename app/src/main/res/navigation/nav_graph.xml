@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_SecondFragment_to_saved_documents"
             app:destination="@+id/documentScanSavedAssignmentsFragment"/>
+        <action
+            android:id="@+id/action_SecondFragment_to_chatMenuFragment"
+            app:destination="@id/chatMenuFragment" />
     </fragment>
     <fragment
         android:id="@+id/Grades"
@@ -94,6 +97,19 @@
         android:label="fragment_forum_new_thread"
         tools:layout="@layout/fragment_forum_new_thread" />
     <fragment
+        android:id="@+id/chatMenuFragment"
+        android:name="sheridan.teodored.myapplication.chat.ChatMenuFragment"
+        android:label="fragment_chat_menu"
+        tools:layout="@layout/fragment_chat_menu" >
+        <action
+            android:id="@+id/action_chatMenuFragment_to_chatMessageFragment"
+            app:destination="@id/chatMessageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatMessageFragment"
+        android:name="sheridan.teodored.myapplication.chat.ChatMessageFragment"
+        android:label="fragment_chat_message"
+        tools:layout="@layout/fragment_chat_message" />
         android:id="@+id/documentScanSavedAssignmentsFragment"
         android:name="sheridan.teodored.myapplication.documentScan.DocumentScanSavedAssignmentsFragment"
         android:label="fragment_view_assignments"/>
