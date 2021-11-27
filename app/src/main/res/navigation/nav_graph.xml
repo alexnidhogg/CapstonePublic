@@ -31,7 +31,7 @@
             app:destination="@id/forumTopicFragment" />
         <action
             android:id="@+id/action_SecondFragment_to_saved_documents"
-            app:destination="@+id/documentScanSavedAssignmentsFragment"/>
+            app:destination="@+id/documentScanFragment"/>
         <action
             android:id="@+id/action_SecondFragment_to_chatMenuFragment"
             app:destination="@id/chatMenuFragment" />
@@ -82,7 +82,7 @@
     </fragment>
     <fragment
         android:id="@+id/documentScanFragment"
-        android:name="sheridan.teodored.myapplication.documentScan.DocumentScanFragment"
+        android:name="sheridan.teodored.myapplication.documentScan.DocumentScanSavedAssignmentsFragment"
         android:label="Document Scanning" >
         <action android:id="@+id/action_document_scan_to_home"
             app:destination="@+id/Sec"/>
@@ -110,9 +110,6 @@
         android:name="sheridan.teodored.myapplication.chat.ChatMessageFragment"
         android:label="fragment_chat_message"
         tools:layout="@layout/fragment_chat_message" />
-        android:id="@+id/documentScanSavedAssignmentsFragment"
-        android:name="sheridan.teodored.myapplication.documentScan.DocumentScanSavedAssignmentsFragment"
-        android:label="fragment_view_assignments"/>
     <fragment
         android:id="@+id/documentPhoto"
         android:name="sheridan.teodored.myapplication.documentScan2.documentPhotoFragment"
