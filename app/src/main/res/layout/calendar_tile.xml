@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/Calendar_Current_Day_Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/Calendar_Tile_Text"
+        app:layout_constraintEnd_toEndOf="@+id/Calendar_Tile_Text"
+        app:layout_constraintStart_toStartOf="@+id/Calendar_Tile_Text"
+        app:layout_constraintTop_toTopOf="@+id/Calendar_Tile_Text"
+        app:srcCompat="@android:drawable/btn_star_big_on" />
+
+    <ImageView
+        android:id="@+id/Calendar_Alert_Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/Calendar_Tile_Text"
+        app:layout_constraintEnd_toEndOf="@+id/Calendar_Tile_Text"
+        app:layout_constraintStart_toStartOf="@+id/Calendar_Tile_Text"
+        app:layout_constraintTop_toTopOf="@+id/Calendar_Tile_Text"
+        app:srcCompat="@android:drawable/ic_notification_overlay" />
+
+    <ImageView
+        android:id="@+id/Calendar_Schedule_Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/Calendar_Alert_Image"
+        app:layout_constraintEnd_toEndOf="@+id/Calendar_Alert_Image"
+        app:layout_constraintStart_toStartOf="@+id/Calendar_Alert_Image"
+        app:layout_constraintTop_toTopOf="@+id/Calendar_Alert_Image"
+        app:srcCompat="@android:drawable/presence_online" />
+
+    <ImageView
+        android:id="@+id/Calendar_Done_Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/Calendar_Tile_Text"
+        app:layout_constraintEnd_toEndOf="@+id/Calendar_Tile_Text"
+        app:layout_constraintStart_toStartOf="@+id/Calendar_Tile_Text"
+        app:layout_constraintTop_toTopOf="@+id/Calendar_Tile_Text"
+        app:srcCompat="@android:drawable/presence_invisible" />
+
+    <ImageView
+        android:id="@+id/Calendar_Tile_Selected_Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/Calendar_Current_Day_Image"
+        app:layout_constraintEnd_toEndOf="@+id/Calendar_Current_Day_Image"
+        app:layout_constraintStart_toStartOf="@+id/Calendar_Current_Day_Image"
+        app:layout_constraintTop_toTopOf="@+id/Calendar_Current_Day_Image"
+        app:srcCompat="@android:drawable/ic_menu_compass" />
+
+    <TextView
+        android:id="@+id/Calendar_Tile_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="##"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

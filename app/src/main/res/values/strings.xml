@@ -31,9 +31,49 @@
     <!-- Chat -->
     <string name="Send">Send</string>
 
+    <!-- Schedule -->
+    <string name="Add_Event">Add Event</string>
+    <string name="Month_Back">&lt;=</string>
+    <string name="Month_Forward">=&gt;</string>
+
+    <string name="Save">Save</string>
+    <string name="Cancel">Cancel</string>
+
+    <string name="Done">Mark As Done</string>
+    <string name="Edit">Edit / View Details</string>
+
+    <string name="Name">Name</string>
+    <string name="DescriptionShort">Desc</string>
+    <string name="DueDate">Due Date</string>
+    <string name="TimeEstimate">Hours of Work</string>
+
+    <string name="ScheduleNewInstructions">Enter a guess for the number of hours that you think it will take you to complete the assignment.</string>
+
+
+    <string name="NewActivity">New Activity</string>
+    <string name="StartDate">Start Date</string>
+    <string name="Repeat">Repeat</string>
+    <string name="Never">Never</string>
+    <string name="Daily">Daily</string>
+    <string name="Weekly">Weekly</string>
+    <string name="BiWeekly">Bi-Weekly</string>
+    <string name="Monthly">Monthly</string>
+    <string name="Yearly">Yearly</string>
+    <string name="Time">Time</string>
+    <string name="End">End</string>
+    <string name="Duration">Duration</string>
+    <string name="Activity">Activity</string>
+    <string name="Assignment">Assignment</string>
+    <string name="Type">Type</string>
+
+
+
+
+
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

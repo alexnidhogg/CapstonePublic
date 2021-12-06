@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_SecondFragment_to_chatMenuFragment"
             app:destination="@id/chatMenuFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_calendar"
+            app:destination="@id/calendar" />
     </fragment>
     <fragment
         android:id="@+id/Grades"
@@ -114,4 +117,18 @@
         android:id="@+id/documentPhoto"
         android:name="sheridan.teodored.myapplication.documentScan2.documentPhotoFragment"
         android:label="fragment_document_photo"/>
+    <fragment
+        android:id="@+id/calendar"
+        android:name="sheridan.teodored.myapplication.schedule.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_calendar_to_calendar_add_event"
+            app:destination="@id/calendar_add_event" />
+    </fragment>
+    <fragment
+        android:id="@+id/calendar_add_event"
+        android:name="sheridan.teodored.myapplication.schedule.CalendarAddEventFragment"
+        android:label="fragment_calendar_add_event"
+        tools:layout="@layout/fragment_calendar_add_event"/>
 </navigation>

@@ -60,6 +60,9 @@ class SecondFragment : Fragment() {
         binding.ChatButton.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_chatMenuFragment)
         }
+        binding.ScheduleButton.setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_calendar)
+        }
     }
 
     override fun onDestroyView() {
