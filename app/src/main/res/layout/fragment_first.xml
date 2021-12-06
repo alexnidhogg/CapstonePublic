@@ -44,5 +44,13 @@
         android:layout_marginBottom="184dp"
         android:text="Login"
         android:translationY="300dp" />
+    <Button
+        android:id="@+id/SignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="184dp"
+        android:text="Sign up"
+        android:translationY="300dp" />
+
 
 </LinearLayout>

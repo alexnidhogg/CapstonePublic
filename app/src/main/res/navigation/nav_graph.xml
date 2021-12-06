@@ -14,6 +14,10 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/actionFirstFragment_to_SignUpFragment"
+            app:destination="@id/sign_up"
+            />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -131,4 +135,14 @@
         android:name="sheridan.teodored.myapplication.schedule.CalendarAddEventFragment"
         android:label="fragment_calendar_add_event"
         tools:layout="@layout/fragment_calendar_add_event"/>
+    <fragment
+        android:id="@+id/sign_up"
+        android:name="sheridan.teodored.myapplication.SignUp.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_SignUpFragment_to_HomeScreen"
+            app:destination="@id/SecondFragment"
+            />
+    </fragment>
 </navigation>

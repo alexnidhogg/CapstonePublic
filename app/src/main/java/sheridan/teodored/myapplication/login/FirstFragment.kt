@@ -40,6 +40,9 @@ class FirstFragment : Fragment() {
         }else{
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
+        binding.SignUp.setOnClickListener {
+            findNavController().navigate(R.id.actionFirstFragment_to_SignUpFragment)
+        }
 
         //Log user in using credentials
         binding.buttonFirst.setOnClickListener {
